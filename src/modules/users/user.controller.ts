@@ -1,14 +1,17 @@
-import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { UserInput } from './user.model';
 import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
-
-  constructor(
-    private readonly userService: UserService,
-  ) {
-  }
+  constructor(private readonly userService: UserService) {}
 
   @Get()
   async getAllUsers() {
@@ -19,6 +22,7 @@ export class UserController {
 
   @Get(':id')
   async getUserById(@Param('id') id: number) {
+    console.log(id, '----');
     const user = await this.userService.findById(id);
 
     if (!user) {
